@@ -43,6 +43,24 @@ const UserSchema = new Schema({
         type: Date,
         select: false
     }
+}, {
+    timestamps: true,
+    toJSON: {virtuals: true},
+    toObject: {virtuals: true}
+})
+
+UserSchema.virtual("followings", {
+    ref: "Follow",
+    localField: "_id",
+    foreignField: "follower",
+    justOne: false
+})
+
+UserSchema.virtual("followers", {
+    ref: "Follow",
+    localField: "_id",
+    foreignField: "following",
+    justOne: false
 })
 
 UserSchema.pre("save", async function (next) {
