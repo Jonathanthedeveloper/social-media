@@ -1,5 +1,5 @@
 const UserService = require("../user/user.service")
-const User = require("../user/user.model")
+const User = require("../user/models/user.model")
 const jwt = require("jsonwebtoken")
 const AppError = require("../error/AppError")
 const { v4: uuidv4 } = require('uuid');
@@ -7,7 +7,7 @@ const { v4: uuidv4 } = require('uuid');
 class AuthController {
 
    static async createAuthTokens(user, res, status = 200) {
-        const access_token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_TOKEN, {expiresIn : "15m"})
+        const access_token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_TOKEN, {expiresIn : "24h"})
             
         // Generate and save refresh token for the user
         user.refresh_token = uuidv4();
