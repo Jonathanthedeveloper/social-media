@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require("cors")
 const helmet = require("helmet")
 const morgan = require("morgan")
-require("dotenv").config()
+// require("dotenv").config()
 const globalErrorHandler = require("./error/error.controller")
 const AuthRouter = require("./auth/auth.route")
 const UserRouter = require("./user/user.route")
