@@ -63,6 +63,13 @@ UserSchema.virtual("followers", {
     justOne: false
 })
 
+UserSchema.virtual("posts", {
+    ref: "Post",
+    localField: "_id",
+    foreignField: "user",
+    justOne: false
+})
+
 UserSchema.pre("save", async function (next) {
     if (this.isNew || this.isModified("password")) {
         this.password = await bcrypt.hash(this.password, 12)

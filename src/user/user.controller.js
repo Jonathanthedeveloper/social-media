@@ -69,6 +69,7 @@ class UserController {
                     username: doc.follower.username,
                 }
             }})
+            .populate({path: "posts", select: "content createdAt"})
 
             const query = new ApiFilter(profileQuery, req.query)
             .filter({singleDoc: true}).limitFields()
@@ -105,6 +106,7 @@ class UserController {
                     username: doc.follower.username,
                 }
             }})
+            .populate({path: "posts", select: "content createdAt"})
 
             const query = new ApiFilter(userQuery, req.query)
             .filter({singleDoc: true}).limitFields()
