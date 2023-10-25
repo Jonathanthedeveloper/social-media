@@ -7,7 +7,7 @@ const app = require("./app")
  */
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log("Connected to mongodb sucessfully"))
-    .catch(() => console.log("failed to connect to database"))
+    .catch(error => console.log("failed to connect to database: " + error.message ))
 
 
 const PORT = process.env.PORT || 3000
@@ -26,4 +26,6 @@ process.on("uncaughtException", function(error) {
 
 process.on("unhandledRejection", function(error) {
     console.log(`UNHANDLED REJECTION: ${error}`)
+
+    process.exit()
 })
