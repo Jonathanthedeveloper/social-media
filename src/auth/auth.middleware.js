@@ -1,6 +1,15 @@
 const jwt = require('jsonwebtoken');
 const User = require("../user/models/user.model")
 
+/**
+ * Middleware function to authenticate user using JWT token
+ * @function authenticate
+ * @async
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
+ * @returns {Object} - Express response object or calls next middleware function
+ */
 async function authenticate(req, res, next) {
     // Get the token from the request header
     const token = req.header('Authorization');

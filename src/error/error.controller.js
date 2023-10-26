@@ -29,7 +29,6 @@ const handleJWTExpiredError = () =>
  * @param {Object} req - The request object.
  * @param {Object} res - The response object.
  * @param {Function} next - The next middleware function.
- * @returns {void}
  */
 function globalErrorHandler(error, req, res, next) {
     error.status = error.status || 'error';

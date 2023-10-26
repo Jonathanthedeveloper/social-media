@@ -48,7 +48,18 @@ const AppError = require('../error/AppError');
   
 //    User.create(users);
 
+/**
+ * Controller class for user-related operations
+ */
 class UserController {
+
+    /**
+     * View the profile of the authenticated user
+     * @param {Object} req - The request object
+     * @param {Object} res - The response object
+     * @param {Function} next - The next middleware function
+     * @returns {Object} - The user profile data
+     */
     static async viewProfile (req,res,next) {
         try {
 
@@ -86,6 +97,13 @@ class UserController {
         }
     }
 
+    /**
+     * View the profile of a user by ID
+     * @param {Object} req - The request object
+     * @param {Object} res - The response object
+     * @param {Function} next - The next middleware function
+     * @returns {Object} - The user profile data
+     */
     static async viewUser(req,res,next) {
         try {
 
@@ -123,6 +141,13 @@ class UserController {
         }
     }
 
+    /**
+     * Follow a user by ID
+     * @param {Object} req - The request object
+     * @param {Object} res - The response object
+     * @param {Function} next - The next middleware function
+     * @returns {Object} - A success message
+     */
     static async followUser(req,res,next) {
         try {
 
@@ -143,6 +168,13 @@ class UserController {
         }
     }
 
+    /**
+     * Unfollow a user by ID
+     * @param {Object} req - The request object
+     * @param {Object} res - The response object
+     * @param {Function} next - The next middleware function
+     * @returns {Object} - A success message
+     */
     static async unFollowUser(req,res,next) {
         try {
 

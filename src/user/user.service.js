@@ -13,10 +13,6 @@ class UserService {
             return user
      
     }
-
-    static findUser(filter) {
-
-    }
 }
 
 
