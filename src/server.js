@@ -16,16 +16,20 @@ const PORT = process.env.PORT || 3000
 /**
  * Listen for incoming requests on the port specified in the .env file or 3000
  */
-app.listen(PORT, function () {
+const server = app.listen(PORT, function () {
     console.log(`server started on http://127.0.0.1:${PORT}`)
 })
 
 process.on("uncaughtException", function(error) {
     console.log(`UNCAUGHT EXCEPTION: ${error}`)
+    server.close(() => {
+        process.exit(1)
+    })
 })
 
 process.on("unhandledRejection", function(error) {
     console.log(`UNHANDLED REJECTION: ${error}`)
-
-    process.exit()
+    server.close(() => {
+        process.exit(1)
+    })
 })
