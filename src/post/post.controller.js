@@ -1,6 +1,8 @@
-const Post = require("./post.model")
+const Post = require("./models/post.model")
 const ApiFilter = require("../utils/apiFilter")
 const User = require("../user/models/user.model")
+const Like = require("./models/like.model")
+const AppError = require("../error/AppError")
 
 class PostController {
     static async createPost(req,res,next) {
@@ -62,6 +64,10 @@ class PostController {
             const query = new ApiFilter(postsQuery, req.query);
 
             const posts = await query.query;
+
+            if(!posts) {
+                return next(new AppError("No posts found. Try adjusting your filters", 404));
+            }
     
             res.status(200).json({
                 status: "success",
@@ -70,6 +76,29 @@ class PostController {
         } catch (error) {
             next(error);
         }
+    }
+
+    static async likePost(req,res,next) {
+        const like = await Like.create({
+            user: req.user.id,
+            post: req.params.post_id
+        })
+
+        if(!like) {
+            return next(new AppError("Failed to like post", 400))
+        }
+
+        res.status(201).json({status: "success", data: like, message: "Post liked successfully"})
+    }
+    
+    static async unlikePost(req,res,next) {
+        const like = await Like.findOneAndDelete({user: req.user.id, post: req.params.post_id})
+
+        if(!like) {
+            return next(new AppError("Failed to unlike post", 400))
+        }
+
+        res.status(200).json({status: "success", data: like, message: "Post unliked successfully"})
     }
 }
 
